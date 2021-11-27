@@ -1,10 +1,13 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_tweet, only: %i[ show edit update destroy ]
+  TWEETS_PER_PAGE = 50
 
   # GET /tweets or /tweets.json
   def index
-    @tweets = Tweet.all
+    @page = params.fetch(:page, 0).to_i
+    @pages = (Tweet.all.count / TWEETS_PER_PAGE.to_f).ceil
+    @tweets = Tweet.offset(@page * TWEETS_PER_PAGE).limit(TWEETS_PER_PAGE)
   end
 
   # GET /tweets/1 or /tweets/1.json

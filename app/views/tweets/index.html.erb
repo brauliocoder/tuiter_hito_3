@@ -26,6 +26,15 @@
   </tbody>
 </table>
 
+<% if @page > 0 %>
+  <%= link_to "tweets anteriores", tweets_path(page: @page - 1) %>
+<% end %>
+
+<% if (@page + 1) < @pages %>
+  <%= link_to "mostrar más tweets", tweets_path(page: @page + 1) %>
+<% end %>
+
+
 <br>
 
 <%= link_to 'New Tweet', new_tweet_path %>
