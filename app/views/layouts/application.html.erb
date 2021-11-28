@@ -7,11 +7,11 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    
     <% if user_signed_in? %>
       <%= link_to 'New Tweet', new_tweet_path %>
       <%= link_to "Edit", edit_user_registration_path %>
