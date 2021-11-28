@@ -1,0 +1,7 @@
+<% pre_retweet = tweet.retweets.find { |tweet| tweet.user_id == current_user.id} %>
+
+<% if pre_retweet %>
+    <%= button_to 'UnRetweet', tweet_path(tweet), method: :delete %>
+<% else %>
+    <%= button_to 'Retweet', new_tweet_path(), method: :get %>
+<% end %>

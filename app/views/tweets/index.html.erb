@@ -3,21 +3,22 @@
 <h1>Tweets</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Retweet</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @tweets.each do |tweet| %>
       <tr>
+        <td><%= tweet.id %></td>
         <td><%= tweet.content %></td>
-        <td><%= tweet.retweet_id %></td>
-        <td><%= tweet.user_id %></td>
+        <td><%= tweet.user.account %></td>
+        <td>"fuente: <%= tweet.retweet_id %>"</td>
+
+        <%# Retweets %>
+        <td>"<%= tweet.retweets.count %> <%= (tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%>"</td>
+        <td><%= link_to 'Retweet', new_tweet_path(retweet_id: tweet.id) %></td>
+        
+        <%# Likes %>
+        <td><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%></td>
+        <td><%= render 'likes/like_buttons', tweet: tweet %></td>
+
         <td><%= link_to 'Show', tweet %></td>
         <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
         <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>

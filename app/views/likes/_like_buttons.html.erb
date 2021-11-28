@@ -1,0 +1,7 @@
+<% pre_like = tweet.likes.find { | like | like.user_id == current_user.id} %>
+
+<% if pre_like %>
+    <%= link_to 'Unlike', tweet_like_path(tweet, pre_like), method: :delete %>
+<% else %>
+    <%= link_to 'Like', tweet_likes_path(tweet), method: :post %>
+<% end %>
