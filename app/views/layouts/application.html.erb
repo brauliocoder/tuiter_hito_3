@@ -13,11 +13,19 @@
 
   <body class="h-screen">
     <% if user_signed_in? %>
-      <%= link_to 'New Tweet', new_tweet_path %>
-      <%= link_to "Edit", edit_user_registration_path %>
-      <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+      <div class="static flex">
+        <div class="h-full w-1/4">
+          <div class="fixed h-full w-1/4 bg-gray-50">
+            <%= render "/tweets/sidebar" %>
+          </div>
+        </div>
+        <div class="w-3/4 ml-10">
+          <%= yield %>
+        </div>
+      </div>
+    <% else %>
+      <%= yield %>
     <% end %>
 
-    <%= yield %>
   </body>
 </html>
