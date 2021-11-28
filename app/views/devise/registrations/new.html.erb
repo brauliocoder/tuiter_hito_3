@@ -1,39 +1,47 @@
-<h2>Sign up</h2>
+<div class="flex h-full bg-gradient-to-l from-purple-400 via-pink-500 to-red-500">
+  <div class="bg-white w-3/6 max-w-md m-auto py-6 px-10 rounded-md shadow-lg">
+    <img src="https://cdn.pixabay.com/photo/2016/12/17/15/50/logo-1913689_1280.png" class="h-10 select-none mx-auto mb-5">
+    <h2 class="tuiter-title-md">Crea tu cuenta</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="field mb-8">
+        <%= f.label "Foto de perfil", class: "tuiter-form-label" %>
+        <%= f.text_field :profile_picture, autocomplete: "https://", class: "tuiter-form", type: "url" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :profile_picture %><br />
-    <%= f.text_field :profile_picture, autocomplete: "https://" %>
+      <div class="field">
+        <%= f.label :email, class: "tuiter-form-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "tuiter-form" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :account, "Nombre de cuenta", class: "tuiter-form-label" %>
+        <%= f.text_field :account, autocomplete: "@usuario", class: "tuiter-form" %>
+      </div>
+
+      <div class="mt-8">
+        <div class="field">
+          <%= f.label :password, "Contraseña", class: "tuiter-form-label" %>
+          <% if @minimum_password_length %>
+          (<%= @minimum_password_length %> carácteres mínimo)
+          <% end %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "tuiter-form" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation, "Confirma la contraseña", class: "tuiter-form-label" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "tuiter-form" %>
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Registrarse", class: "tuiter-button" %>
+      </div>
+    <% end %>
+    <div class="ml-2 text-sm flex justify-between">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :account %><br />
-    <%= f.text_field :account, autocomplete: "@usuario" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

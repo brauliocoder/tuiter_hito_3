@@ -1,3 +1,19 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.tuiter-form {
+    @apply pl-2 pr-8 py-1 rounded-md w-full transition delay-75 ease-in-out hover:bg-blue-50 border-2 border-gray-200 hover:border-gray-700;
+}
+
+.tuiter-button {
+    @apply w-full py-1 rounded-full transition delay-75 ease-in-out hover:bg-blue-300 mt-5;
+}
+
+.tuiter-title-md {
+    @apply text-3xl;
+}
+
+.tuiter-form-label {
+    @apply font-light;
+}

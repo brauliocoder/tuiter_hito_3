@@ -8,29 +8,29 @@
   <div class="block my-auto ml-10">
     <img src="https://cdn.pixabay.com/photo/2016/12/17/15/50/logo-1913689_1280.png" class="h-10 select-none">
     <h1 class="text-5xl font-medium mb-8">Lo que está pasando ahora</h1>
-    <h2 class="text-3xl">¿Ya tienes una cuenta?</h2>
+    <h2 class="tuiter-title-md">¿Ya tienes una cuenta?</h2>
 
     <div class="w-4/5 px-2 mt-3">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field">
-          <%= f.label "correo", class: "font-light" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "pl-3 pr-8 py-1 rounded-md w-full hover:bg-blue-50" %>
+          <%= f.label "correo", class: "tuiter-form-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "tuiter-form" %>
         </div>
 
         <div class="field">
-          <%= f.label "contraseña", class: "font-light" %>
-          <%= f.password_field :password, autocomplete: "current-password", class: "pl-2 pr-8 py-1 rounded-md w-full hover:bg-blue-50" %>
+          <%= f.label "contraseña", class: "tuiter-form-label" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "tuiter-form" %>
         </div>
 
         <% if devise_mapping.rememberable? %>
           <div class="field">
             <%= f.check_box :remember_me %>
-            <span>Recuerdame</span>
-          </div>
+            <%= f.label :remember_me, "Recuerdame" %>
+          </div>  
         <% end %>
 
         <div class="actions">
-          <%= f.submit "Iniciar Sesión", class: "w-full py-1 rounded-full hover:bg-blue-300 mt-5 " %>
+          <%= f.submit "Iniciar Sesión", class: "tuiter-button" %>
         </div>
       <% end %>
 
