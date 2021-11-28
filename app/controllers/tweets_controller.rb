@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_tweet, only: %i[ show edit update destroy ]
+  before_action :set_tweet, only: %i[ show update destroy ]
+  before_action :is_author?, only: %i[ destroy]
 
   TWEETS_PER_PAGE = 50
 
@@ -24,10 +25,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  # GET /tweets/1/edit
-  def edit
-  end
-
   # POST /tweets
   def create
     @tweet = Tweet.new(tweet_params)
@@ -36,15 +33,6 @@ class TweetsController < ApplicationController
       redirect_to @tweet, notice: "Tweet was successfully created."
     else
       render :new, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /tweets/1
-  def update
-    if @tweet.update(tweet_params)
-      redirect_to @tweet, notice: "Tweet was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -63,5 +51,9 @@ class TweetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def tweet_params
       params.require(:tweet).permit(:content, :retweet_id).merge(user: current_user)
+    end
+
+    def is_author?
+      redirect_to root_path unless @tweet.user == current_user
     end
 end

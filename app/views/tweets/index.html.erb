@@ -4,9 +4,14 @@
 
 <table>
   <tbody>
-    <% @tweets.each do |tweet| %>
+    <% (@tweets.order(created_at: :desc)).each do |tweet| %>
       <tr>
-        <td><%= tweet.id %></td>
+        <td>
+        <%= link_to tweet_path(tweet) do %>
+          <%= tweet.time_since_publish %>
+        <% end %>
+        </td>
+        
         <td><%= tweet.content %></td>
         <td><%= tweet.user.account %></td>
         <td>"fuente: <%= tweet.retweet_id %>"</td>
@@ -19,8 +24,6 @@
         <td><%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%></td>
         <td><%= render 'likes/like_buttons', tweet: tweet %></td>
 
-        <td><%= link_to 'Show', tweet %></td>
-        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
         <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -37,5 +40,3 @@
 
 
 <br>
-
-<%= link_to 'New Tweet', new_tweet_path %>

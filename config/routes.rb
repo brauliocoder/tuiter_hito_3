@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  resources :tweets do
+  resources :tweets, except: [:edit, :update] do
     resources :likes, only: [:create, :destroy]
   end
   

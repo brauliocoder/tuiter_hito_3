@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <%= form.hidden_field :retweet_id, value: @tweet.retweet_id %>
-
   <div class="field">
     <%= form.label :content %>
     <%= form.text_field :content %>
   </div>
+
+  <%= form.hidden_field :retweet_id, value: @tweet.retweet_id %>
 
   <div class="actions">
     <%= form.submit %>
