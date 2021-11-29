@@ -1,22 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @tweet.content %>
-</p>
+<div class="max-w-3xl mx-auto mt-10">
+  <%= link_to 'Regresar', tweets_path, class: "bg-gray-100 hover:bg-gray-700 hover:text-white px-5 py-1 rounded" %>
+  <div class="mt-2">
+    <%= render '/tweets/tweet', tweet: @tweet, retweet: Tweet.find_by(id: @tweet.retweet_id) %>
+  </div>
+  <div>
+    <% @tweet.likes.each do |account| %>
+      <% user_pic = account.user.profile_picture %>
+      <% if user_pic.nil? %>
+        <p>
+          <%= user_pic %>
+        </p>
+      <% else %>
+        <p>
+          default
+          <%= account.user.account %> 
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
-<p>
-  <strong>Retweet:</strong>
-  <%= @tweet.retweet_id %>
-</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @tweet.user_id %>
-</p>
-
-<p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
-<%= button_to 'Like', tweet_likes_path(@tweet), method: :post %>
-
-
-<%= link_to 'Back', tweets_path %>

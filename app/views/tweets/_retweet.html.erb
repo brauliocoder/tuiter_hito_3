@@ -4,7 +4,7 @@
     <div class="flex space-x-1 p-1">
         <%# image %>
         <div>
-            <img src="https://www.uaa.mx/portal/wp-content/themes/UAAV1/images/autor-nofoto.jpg" alt="" class="rounded-full w-10 m-2">
+            <div class="bg-cover bg-center rounded-full h-10 w-10 m-2 transition delay-75 ease-in-out" style="background-image: url(<%= tweet.user.profile_picture %>)"></div>
         </div>
 
         <%# account info section %>

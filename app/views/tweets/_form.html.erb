@@ -1,5 +1,5 @@
 <div class="h-screen w-full flex flex-wrap content-center">
-  <div class="mx-auto p-5 bg-gray-50 rounded-md">
+  <div class="mx-auto p-5 bg-gray-50 rounded-md shadow-md">
     <%= form_with(model: tweet) do |form| %>
       <% if tweet.errors.any? %>
         <div id="error_explanation">
@@ -14,7 +14,10 @@
       <% end %>
 
       <div class="field">
-        <%= form.label :content, "¿Qué está pasando?", class: "tuiter-title-md" %>
+        <div class="flex space-x-2">
+          <div class="bg-cover bg-center rounded-full h-20 w-20 m-2 transition delay-75 ease-in-out" style="background-image: url(<%= current_user.profile_picture %>)"></div>
+          <%= form.label :content, "¿Qué está pasando?", class: "tuiter-title-md my-auto pr-80" %>
+        </div>
         <%= form.text_area :content, class: "mt-5 w-full h-36 rounded p-2 font-light" %>
       </div>
 
