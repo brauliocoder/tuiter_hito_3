@@ -5,21 +5,17 @@
   <div class="mt-2">
     <%= render '/tweets/tweet', tweet: @tweet, retweet: Tweet.find_by(id: @tweet.retweet_id) %>
   </div>
-  <div>
-    <% @tweet.likes.each do |account| %>
-      <% user_pic = account.user.profile_picture %>
-      <% if user_pic.nil? %>
-        <p>
-          <%= user_pic %>
-        </p>
-      <% else %>
-        <p>
-          default
-          <%= account.user.account %> 
-        </p>
-      <% end %>
-    <% end %>
-  </div>
+  <% if @tweet.likes.count > 0 %>
+    <div class="mt-5 p-5 rounded-md mx-auto overflow-ellipsis overflow-hidden">
+      <p class="tuiter-title-md mr-5 text-right">Likes</p>
+        <% @tweet.likes.each do |account| %>
+          <div class="flex justify-end">
+            <div class="my-auto text-gray-600 font-light select-none text-sm"><%= account.user.account %></div>
+            <div class="shadow-sm border-2 bg-cover bg-center rounded-full h-8 w-8 m-2 transition delay-75 ease-in-out" style="background-image: url(<%= account.user.profile_picture %>)"></div>
+          </div>
+        <% end %>
+    </div>
+  <% end %>
 </div>
 
 

@@ -1,5 +1,6 @@
 <div class="mt-10 mx-auto">
   <p id="notice"><%= notice %></p>
+  <p id="alert"><%= alert %></p>
   
   <div class="space-y-2 mb-20">
     <% (@tweets.order(created_at: :desc)).each do |tweet| %>

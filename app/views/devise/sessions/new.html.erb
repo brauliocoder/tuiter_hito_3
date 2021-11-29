@@ -11,6 +11,7 @@
     <h2 class="tuiter-title-md">¿Ya tienes una cuenta?</h2>
 
     <div class="w-4/5 px-2 mt-3">
+      <%= render '/tweets/alerts' %>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field">
           <%= f.label "correo", class: "tuiter-form-label" %>
