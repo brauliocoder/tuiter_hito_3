@@ -1,7 +1,33 @@
-<% pre_retweet = tweet.retweets.find { |tweet| tweet.user_id == current_user.id} %>
+<%# tweet card%>
+<div class="max-w-3xl border-dashed border-2 rounded-md bg-gray-50 hover:bg-gray-50 mx-auto">
+    <%# user details section %>
+    <div class="flex space-x-1 p-1">
+        <%# image %>
+        <div>
+            <img src="https://www.uaa.mx/portal/wp-content/themes/UAAV1/images/autor-nofoto.jpg" alt="" class="rounded-full w-10 m-2">
+        </div>
 
-<% if pre_retweet %>
-    <%= button_to 'UnRetweet', tweet_path(tweet), method: :delete %>
-<% else %>
-    <%= button_to 'Retweet', new_tweet_path(), method: :get %>
-<% end %>
+        <%# account info section %>
+        <div class="flex my-auto w-full justify-between">
+
+            <%# account name %>
+            <span class="font-medium select-none">@<%= tweet.user.account %></span>
+
+            <%# tweet published at %>
+            <div class="flex justify-end">
+                <%# time published %>
+                <span class="text-sm mr-4 font-light my-auto"> 
+                    <%= link_to tweet_path(tweet) do %>
+                    hace
+                    <%= tweet.time_since_publish %>
+                    <% end %>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <%# content section %>
+    <div class="mx-12 mb-8 font-light select-none">
+        <%= tweet.content %>
+    </div>
+</div>

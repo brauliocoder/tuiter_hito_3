@@ -1,0 +1,79 @@
+<%# tweet card%>
+<div class="max-w-3xl border-2 rounded-md hover:bg-gray-50 mx-auto">
+    <%# user details section %>
+    <div class="flex space-x-1 p-1">
+        <%# image %>
+        <div>
+            <img src="https://www.uaa.mx/portal/wp-content/themes/UAAV1/images/autor-nofoto.jpg" alt="" class="rounded-full w-10 m-2">
+        </div>
+
+        <%# account info section %>
+        <div class="flex my-auto w-full justify-between">
+
+            <%# account name %>
+            <span class="font-medium select-none">@<%= tweet.user.account %></span>
+
+            <%# tweet published at %>
+            <div class="flex justify-end">
+                <%# time published %>
+                <span class="text-sm mr-4 font-light my-auto"> 
+                    <%= link_to tweet_path(tweet) do %>
+                    hace
+                    <%= tweet.time_since_publish %>
+                    <% end %>
+                </span>
+
+                <%# delete icon if user is author %>
+                <span class="my-auto m-2 text-gray-300 hover:text-pink-700">
+                    <% if tweet.user.id == current_user.id %>
+                        <%= link_to tweet, method: :delete, data: { confirm: '¿estás seguro?' } do %>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        <% end %>
+                    <% end %>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <%# content section %>
+    <div class="mx-12 mb-2 font-light select-none">
+        <%= tweet.content %>
+    </div>
+
+    <%# retweet section %>
+    <% if retweet %>
+        <div class="m-2">
+            <%= render '/tweets/retweet', tweet: retweet %>
+        </div>
+    <% end %>
+
+    <%# like unlike retweet section %>
+    <div class="flex mt-5 mb-3 justify-around">
+        <%# Retweets %>
+        <div class="flex space-x-1 my-auto text-gray-400 hover:text-gray-900">
+            <%= link_to new_tweet_path(retweet_id: tweet.id) do %>
+                <span class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                </span>
+            <% end %>
+            
+            <span class="text-sm my-auto select-none">
+                <%= tweet.retweets.count %> <%= (tweet.retweets.count) == 1 ? 'retweet' : 'retweets'%>
+            </span>
+        </div>
+        
+        <%# Likes %>
+        <div class="group flex space-x-1 my-auto">
+            <span class="cursor-pointer">
+                <%= render 'likes/like_buttons', tweet: tweet %>
+            </span>
+            <span class="text-sm my-auto select-none text-gray-400 group-hover:text-gray-900">
+                <%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%>
+            </span>
+        </div>
+    </div>
+</div>

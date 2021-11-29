@@ -1,24 +1,34 @@
-<%= form_with(model: tweet) do |form| %>
-  <% if tweet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+<div class="h-screen w-full flex flex-wrap content-center">
+  <div class="mx-auto p-5 bg-gray-50 rounded-md">
+    <%= form_with(model: tweet) do |form| %>
+      <% if tweet.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
 
-      <ul>
-        <% tweet.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% tweet.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_field :content %>
+      <div class="field">
+        <%= form.label :content, "¿Qué está pasando?", class: "tuiter-title-md" %>
+        <%= form.text_area :content, class: "mt-5 w-full h-36 rounded p-2 font-light" %>
+      </div>
+
+      <%= form.hidden_field :retweet_id, value: @tweet.retweet_id %>
+
+      <% if not @tweet.retweet_id.nil? %>
+        <%= render '/tweets/retweet', tweet: Tweet.find(@tweet.retweet_id) %>
+      <% end %>
+
+      <div class="flex justify-between mt-8">
+        <%= form.submit "Crear Tuit", class: "tuiter-button max-w-xs" %>
+        <%= link_to 'Regresar', tweets_path, class: "px-5 my-auto hover:bg-gray-800 hover:text-white rounded" %>
+      </div>
+
+    <% end %>
   </div>
-
-  <%= form.hidden_field :retweet_id, value: @tweet.retweet_id %>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
