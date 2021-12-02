@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   PROFILE_PICTURE_BY_DEFAULT = "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
 
-  has_many :tweets
+  has_many :tweets, dependent: :destroy
   has_many :likes, dependent: :destroy
 
   before_save :set_default_picture

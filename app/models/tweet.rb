@@ -5,7 +5,7 @@ class Tweet < ApplicationRecord
 
   # recursive reference for retweet
   belongs_to :source, class_name: "Tweet", optional: true
-  has_many :retweets, class_name: "Tweet", foreign_key: "retweet_id"
+  has_many :retweets, class_name: "Tweet", foreign_key: "retweet_id", dependent: :destroy
 
   # likes model association
   has_many :likes, dependent: :destroy
