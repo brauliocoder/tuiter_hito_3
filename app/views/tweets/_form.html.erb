@@ -1,24 +1,12 @@
-<div class="h-screen w-full flex flex-wrap content-center">
-  <div class="mx-auto p-5 bg-gray-50 rounded-md shadow-md">
+<div class="h-full flex flex-wrap content-center">
+  <div class="mx-auto my-auto p-5 bg-gray-50 rounded-md shadow-lg max-w-3xl border-2">
     <%= form_with(model: tweet) do |form| %>
-      <% if tweet.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
-
-          <ul>
-            <% tweet.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
       <div class="field">
         <div class="flex space-x-2">
           <div class="bg-cover bg-center rounded-full h-20 w-20 m-2 transition delay-75 ease-in-out" style="background-image: url(<%= current_user.profile_picture %>)"></div>
           <%= form.label :content, "¿Qué está pasando?", class: "tuiter-title-md my-auto pr-80" %>
         </div>
-        <%= form.text_area :content, class: "mt-5 w-full h-36 rounded p-2 font-light" %>
+        <%= form.text_area :content, class: "mt-5 w-full h-36 border-2 max-h-52 rounded p-2 font-light" %>
       </div>
 
       <%= form.hidden_field :retweet_id, value: @tweet.retweet_id %>
@@ -32,6 +20,17 @@
         <%= link_to 'Regresar', tweets_path, class: "px-5 my-auto hover:bg-gray-800 hover:text-white rounded" %>
       </div>
 
+      <% if tweet.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+
+          <ul>
+            <% tweet.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<div class="max-w-3xl mx-auto mt-10">
-  <%= link_to 'Regresar', tweets_path, class: "bg-gray-100 hover:bg-gray-700 hover:text-white px-5 py-1 rounded" %>
-  <div class="mt-2">
+<div class="max-w-3xl mt-10">
+  <div class="space-y-2 mt-2">
+    <%= link_to 'Regresar', tweets_path, class: "bg-gray-100 hover:bg-gray-700 hover:text-white px-5 py-1 rounded" %>
     <%= render '/tweets/tweet', tweet: @tweet, retweet: Tweet.find_by(id: @tweet.retweet_id) %>
   </div>
+
   <% if @tweet.likes.count > 0 %>
-    <div class="mt-5 p-5 rounded-md mx-auto overflow-ellipsis overflow-hidden">
+    <div class="mt-5 p-5 mx-auto">
       <p class="tuiter-title-md mr-5 text-right">Likes</p>
         <% @tweet.likes.each do |account| %>
           <div class="flex justify-end">

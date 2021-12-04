@@ -10,8 +10,7 @@ class FriendsController < ApplicationController
   end
   
   def unfollow
-    @user_follows =  Friend.where(user_id: current_user.id)
-    @relationship = @user_follows.find_by(friend_id: params[:id])
+    @relationship = Friend.find_by(user_id: current_user.id, friend_id: params[:id])
 
     if not @relationship.nil?
       @relationship.destroy

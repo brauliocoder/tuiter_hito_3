@@ -11,18 +11,16 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="h-screen">
+  <body class="flex flex-row">
     <% if user_signed_in? %>
-      <div class="static flex">
-        <div class="h-full w-1/4">
-          <div class="fixed h-full w-1/4 bg-gray-50">
-            <%= render "/tweets/sidebar", user: current_user %>
-          </div>
-        </div>
-        <div class="w-3/4 ml-10">
-          <%= yield %>
-        </div>
+      <div class="h-screen flex flex-col flex-none w-1/4 justify-end bg-gray-50 p-5">
+        <%= render "/tweets/sidebar/sidebar", user: current_user %>
       </div>
+
+      <div class="w-screen h-screen overflow-auto px-2">
+        <%= yield %>
+      </div>
+
     <% else %>
       <%= yield %>
     <% end %>

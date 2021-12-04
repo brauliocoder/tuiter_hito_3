@@ -67,7 +67,6 @@ users.each do |user|
 
   tweets.each do |tweet|
     if rand(1..user_like_factor) <= 3
-
       yet_liked = tweet.likes.find { | like | like.user_id == user.id }
       if not yet_liked
         Like.create([{
@@ -75,7 +74,25 @@ users.each do |user|
           user_id: user.id
         }])
       end
-
     end
+  end
+end
+
+# Hallo welt
+zauberei = "Hello World"
+Tweet.create ([{ 
+  content: zauberei,
+  user_id: users.find_by_account("Braulio").id
+}])
+
+alles_mag = Tweet.find_by_content(zauberei)
+
+users.each do |user|
+  yet_liked = alles_mag.likes.find { | like | like.user_id == user.id }
+  if not yet_liked
+    Like.create([{
+      tweet_id: alles_mag.id,
+      user_id: user.id
+    }])
   end
 end
