@@ -7,21 +7,24 @@
             <div class="bg-cover bg-center rounded-full h-12 w-12 m-2 transition delay-75 ease-in-out" style="background-image: url(<%= tweet.user.profile_picture %>)"></div>
         </div>
 
-        <span>  
-            <% if tweet.user.id != current_user.id %>
-                <% if current_user.followed_users.include?(tweet.user) %>
-                    <h5><%= button_to "Dejar de seguir", unfollow_path(tweet.user.id), method: "POST" %></h5>
-                <% else %>
-                    <h5><%= button_to "Seguir", follow_path(tweet.user.id), method: "POST"  %></h5>
-                <% end%>
-            <% end %>
-        </span>
-
         <%# account info section %>
         <div class="flex my-auto w-full justify-between">
+            
+            <div class="inline-block">
+                <%# follow unfollow buttons %>
+                <span class="text-xs">
+                    <% if tweet.user.id != current_user.id %>
+                        <% if current_user.followed_users.include?(tweet.user) %>
+                            <h5><%= button_to "Siguiendo a", unfollow_path(tweet.user.id), method: "POST", class: "px-2 rounded cursor-pointer transition easy-in-out bg-blue-300 hover:bg-red-300" %></h5>
+                        <% else %>
+                            <h5><%= button_to "Seguir a", follow_path(tweet.user.id), method: "POST", class: "px-2 rounded cursor-pointer transition easy-in-out hover:bg-blue-300"  %></h5>
+                        <% end%>
+                    <% end %>
+                </span>
 
-            <%# account name %>
-            <span class="font-medium select-none">@<%= tweet.user.account %></span>
+                <%# account name %>
+                <span class="font-medium select-none">@<%= tweet.user.account %></span>
+            </div>
 
             <%# tweet published at %>
             <div class="flex justify-end">
