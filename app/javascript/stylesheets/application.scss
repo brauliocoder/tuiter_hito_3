@@ -17,3 +17,15 @@
 .tuiter-form-label {
     @apply font-light;
 }
+
+.page-after-button {
+    @apply p-3 px-10 text-gray-800 bg-gray-50  hover:bg-indigo-400 hover:text-white rounded-md;
+}
+
+.to-init-button {
+    @apply p-3 px-10 rounded-full text-xs text-gray-800 bg-gray-50 hover:bg-pink-500 hover:text-white rounded-md;
+}
+
+.page-next-button {
+    @apply p-3 px-10 text-gray-800 bg-gray-200 hover:bg-blue-400 hover:text-white rounded-md;
+}

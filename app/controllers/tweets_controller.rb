@@ -9,6 +9,7 @@ class TweetsController < ApplicationController
   def index
     @page = params.fetch(:page, 0).to_i
     @pages = (Tweet.all.count / TWEETS_PER_PAGE.to_f).ceil
+    
     @tweets = Tweet.offset(@page * TWEETS_PER_PAGE).limit(TWEETS_PER_PAGE)
   end
 

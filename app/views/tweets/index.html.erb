@@ -3,10 +3,12 @@
   <p id="alert"><%= alert %></p>
   
   <div class="space-y-2 mb-20">
-    <% (@tweets.order(created_at: :desc)).each do |tweet| %>
-      <%# tweets here %>
-      <%= render "/tweets/tweet", tweet: tweet, retweet: Tweet.find_by(id: tweet.retweet_id) %>
+    <% if params[:page].to_i >= 0 %>
+      <% (@tweets.order(created_at: :desc)).each do |tweet| %>
+        <%# tweets here %>
+        <%= render "/tweets/tweet", tweet: tweet, retweet: Tweet.find_by(id: tweet.retweet_id) %>
+      <% end %>
+      <%= render "/tweets/more_tweets_buttons" %>
     <% end %>
-    <%= render "/tweets/more_tweets_buttons" %>
   </div>
 </div>
