@@ -1,19 +1,19 @@
 <div class="flex justify-around pt-10">
-    <% if @page > 0 %>
-        <%= link_to tweets_path(page: @page - 1) do %>
-            <span class="page-after-button">tweets anteriores</span>
-        <% end %>
-    <% end %>
+	<% if @page > 0 %>
+		<%= link_to url_for(page: @page - 1) do %>
+			<span class="page-after-button">tweets anteriores</span>
+		<% end %>
+	<% end %>
 
-    <% if @page >= 1 %>
-        <%= link_to tweets_path(page: 0) do %>
-            <span class="to-init-button">Al Inicio</span>
-        <% end %>
-    <% end %> 
+	<% if @page >= 1 %>
+		<%= link_to url_for(page: 0) do %>
+			<span class="to-init-button">Al Inicio</span>
+		<% end %>
+	<% end %> 
 
-    <% if (@page + 1) < @pages %>
-        <%= link_to tweets_path(page: @page + 1) do %>
-            <span class="page-next-button">mostrar más tweets</span>
-        <% end %>
-    <% end %>
+	<% if (@page + 1) < @pages %>
+		<%= link_to url_for(page: @page + 1) do %>
+			<span class="page-next-button">mostrar más tweets</span>
+		<% end %>
+	<% end %>
 </div>

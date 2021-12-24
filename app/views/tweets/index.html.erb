@@ -1,16 +1,36 @@
-<div class="mt-10 mx-auto">
-  <div class="space-y-2 mb-20">
-    <p id="notice"><%= notice %></p>
-    <p id="alert"><%= alert %></p>
-    
-    <% if params[:page].to_i >= 0 %>
 
-      <% (@tweets.order(created_at: :desc)).each do |tweet| %>
-        <%# tweets here %>
-        <%= render "/tweets/tweet", tweet: tweet, retweet: Tweet.find_by(id: tweet.retweet_id) %>
-      <% end %>
+<div class="flex flex-row">
+	<div class="flex-grow">
+		<div class="flex flex-row h-14 bg-white sticky top-0 shadow-sm border-2 justify-between px-5 bg-opacity-75 backdrop-filter backdrop-blur-sm">
+			<img src="https://cdn.pixabay.com/photo/2016/12/17/15/50/logo-1913689_1280.png" class="w-7 h-7 my-auto">
+			<div class="my-auto h-10 w-4/5 bg-gray-100 border-2 rounded-full cursor-text"></div>
+		</div>
 
-      <%= render "/tweets/more_tweets_buttons" %>
-    <% end %>
-  </div>
+		<div class="flex flex-grow mt-3">
+			<div class="space-y-1 mb-20 mx-auto">
+				<p id="notice"><%= notice %></p>
+				<p id="alert"><%= alert %></p>
+				
+				<% if params[:page].to_i >= 0 %>
+					<% (@tweets.order(created_at: :desc)).each do |tweet| %>
+						<%# tweets here %>
+						<%= render "/tweets/tweet", tweet: tweet, retweet: Tweet.find_by(id: tweet.retweet_id) %>
+					<% end %>
+
+					<%= render 'more_tweets_buttons' %>
+
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<div class="flex flex-col flex-none w-4/12 h-screen sticky top-1 p-5 text-gray-800">
+		<div class="flex flex-col h-auto bg-gray-100 rounded-xl mt-5 p-10 pt-5 space-y-4">
+			<span class="text-2xl font-bold mb-5">A quién seguir</span>
+			<p>One</p>
+			<p>Two</p>
+			<p>Three</p>
+			<p>Four</p>
+		</div>
+	</div>
 </div>

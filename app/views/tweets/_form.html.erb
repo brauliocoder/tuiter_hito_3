@@ -1,13 +1,15 @@
 <div class="h-full flex flex-wrap content-center">
-  <div class="mx-auto my-auto p-5 bg-gray-50 rounded-md shadow-lg max-w-3xl border-2">
+  <div class="mx-auto my-auto p-5 bg-gray-50 rounded-md shadow-lg border-2">
     <%= form_with(model: tweet) do |form| %>
-      <div class="field">
-        <div class="flex space-x-2">
-          <div class="bg-cover bg-center rounded-full h-20 w-20 m-2 transition delay-75 ease-in-out" style="background-image: url(<%= current_user.profile_picture %>)"></div>
-          <%= form.label :content, "¿Qué está pasando?", class: "tuiter-title-md my-auto pr-80" %>
+      
+      <div class="flex justify-between">
+        <div class="flex flex-row">
+          <div class="flex-none bg-cover bg-center rounded-full h-20 w-20 m-2 transition delay-75 ease-in-out" style="background-image: url(<%= current_user.profile_picture %>)"></div>
+          <%= form.label :content, "¿Qué está pasando?", class: "text-4xl mr-20 my-auto w-full" %>
         </div>
-        <%= form.text_area :content, class: "mt-5 w-full h-36 border-2 max-h-52 rounded p-2 font-light" %>
+        <img src="https://cdn.pixabay.com/photo/2016/12/17/15/50/logo-1913689_1280.png" alt="" class="h-12 w-12 my-auto">
       </div>
+      <%= form.text_area :content, class: "mt-5 w-full h-36 border-2 max-h-52 rounded p-2 font-light" %>
 
       <%= form.hidden_field :retweet_id, value: @tweet.retweet_id %>
 
@@ -17,7 +19,7 @@
 
       <div class="flex justify-between mt-8">
         <%= form.submit "Crear Tuit", class: "tuiter-button max-w-xs" %>
-        <%= link_to 'Regresar', tweets_path, class: "px-5 my-auto hover:bg-gray-800 hover:text-white rounded" %>
+        <%= link_to 'Regresar', :back, class: "px-5 my-auto hover:bg-gray-800 hover:text-white rounded" %>
       </div>
 
       <% if tweet.errors.any? %>

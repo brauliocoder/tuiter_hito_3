@@ -4,7 +4,7 @@ class FriendsController < ApplicationController
     @relationship = current_user.active_relationships.new(friend_id: @followed_user.id)
 
     if @relationship.save
-      redirect_to root_path
+      redirect_back(fallback_location: root_path)
     end
 
   end
@@ -16,7 +16,7 @@ class FriendsController < ApplicationController
       @relationship.destroy
     end
     
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 
 end

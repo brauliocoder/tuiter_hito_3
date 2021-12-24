@@ -1,7 +1,8 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_tweet, only: %i[ show update destroy ]
-  before_action :is_author?, only: %i[ destroy]
+  before_action :is_author?, only: %i[ destroy ]
+  before_action :followed_users_ids, only: %i[ profile ]
 
   TWEETS_PER_PAGE = 50
 
@@ -40,8 +41,16 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1
   def destroy
     @tweet.destroy
-    redirect_to tweets_url, notice: "Tweet was successfully destroyed."
+    redirect_back(fallback_location: root_path)
   end
+
+  def home
+    @page = params.fetch(:page, 0).to_i
+    @pages = (followed_users_ids.count / TWEETS_PER_PAGE.to_f).ceil
+
+    @for_user_tweets = Tweet.tweets_for_me(followed_users_ids).offset(@page * TWEETS_PER_PAGE).limit(TWEETS_PER_PAGE)
+  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -55,6 +64,16 @@ class TweetsController < ApplicationController
     end
 
     def is_author?
-      redirect_to root_path unless @tweet.user == current_user
+      redirect_back(fallback_location: root_path) unless @tweet.user == current_user
     end
+
+    def followed_users_ids
+      ids = [current_user.id]
+      current_user.followed_users.each do |user|
+        ids.append(user.id)
+      end
+
+      return ids
+    end
+    
 end

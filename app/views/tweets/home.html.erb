@@ -1,0 +1,19 @@
+<div class="flex max-w-3xl bg-gray-50 h-14 pl-10 sticky top-0 shadow-sm border-2 bg-opacity-75 backdrop-filter backdrop-blur-sm">
+	<span class="my-auto font-semibold text-lg select-none">Inicio</span>
+</div>
+
+<div class="mt-3 mx-auto">
+  <div class="space-y-1 mb-20">
+    <p id="notice"><%= notice %></p>
+    <p id="alert"><%= alert %></p>
+    
+    <% if params[:page].to_i >= 0 %>
+      <% (@for_user_tweets.order(created_at: :desc)).each do |tweet| %>
+        <%# tweets here %>
+        <%= render "/tweets/tweet", tweet: tweet, retweet: Tweet.find_by(id: tweet.retweet_id) %>
+      <% end %>
+
+      <%= render 'more_tweets_buttons' %>
+    <% end %>
+  </div>
+</div>

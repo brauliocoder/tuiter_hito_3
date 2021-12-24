@@ -1,5 +1,7 @@
 class Tweet < ApplicationRecord
   TIME_ZONE = "Santiago"
+  validates :content, presence: true, length: {maximum: 280}
+
   # user reference
   belongs_to :user
 
@@ -9,8 +11,9 @@ class Tweet < ApplicationRecord
 
   # likes model association
   has_many :likes, dependent: :destroy
-  
-  validates :content, presence: true, length: {maximum: 280}
+
+  # SCOPES
+  scope :tweets_for_me, -> (ff) { where(:user_id =>  ff)}
 
   def time_since_publish
     start_date = self.created_at.in_time_zone(TIME_ZONE)

@@ -13,16 +13,20 @@
 
   <body class="flex flex-row">
     <% if user_signed_in? %>
+      <%# Sidebar %>
       <div class="h-screen flex flex-col flex-none w-1/4 justify-end bg-gray-50 p-5">
         <%= render "/tweets/sidebar/sidebar", user: current_user %>
       </div>
 
-      <div class="w-screen h-screen overflow-auto px-2">
+      <%# Main content %>
+      <div class="w-screen h-screen overflow-auto">
         <%= yield %>
       </div>
 
     <% else %>
-      <%= yield %>
+      <div class="w-screen h-screen overflow-auto">
+        <%= yield %>
+      </div>
     <% end %>
 
   </body>
