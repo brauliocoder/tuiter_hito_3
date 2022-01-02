@@ -14,7 +14,7 @@ class Tweet < ApplicationRecord
 
   # SCOPES
   scope :tweets_for_me, -> (ff) { where(:user_id =>  ff)}
-
+  
   def time_since_publish
     start_date = self.created_at.in_time_zone(TIME_ZONE)
     time_now = Time.now.in_time_zone(TIME_ZONE)
@@ -29,4 +29,13 @@ class Tweet < ApplicationRecord
       hours == 1 ? "#{hours} hora" : "#{hours} horas"
     end
   end
+
+  def self.search(search)
+    if search
+      where('lower(content) LIKE ?', "%#{search.downcase}%")
+    else
+      all
+    end
+  end
+  
 end
