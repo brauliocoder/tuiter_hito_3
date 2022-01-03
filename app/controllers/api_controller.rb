@@ -46,5 +46,23 @@ class ApiController < ApplicationController
       render json: array.to_json
     end
   end
-  
+
+  def create
+    auth_header = request.headers["Authorization"].gsub("Basic ","")
+    content = request.headers["Content"]
+    decoded = Base64.decode64(auth_header).split(":")
+
+    usr = decoded[0]
+    pss = decoded[1]
+
+    user = User.find_by(account: usr)
+    if user
+      if user.valid_password?(pss)
+        t = Tweet.new
+        t.content = content
+        t.user_id = user.id
+        t.save
+      end
+    end
+  end
 end

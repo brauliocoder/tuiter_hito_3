@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   
   get '/home', to: "tweets#home", as: "home"
   
-  get '/api/news', to: "api#news", as: "api"
-  get '/api/:start/:final', to: "api#between_dates", as: "between_dates_api"
+  get '/api/news', to: "api#news"
+  get '/api/:start/:final', to: "api#between_dates"
+  get '/api/create', to: "api#create"
 
 end
