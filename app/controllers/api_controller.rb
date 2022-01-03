@@ -19,4 +19,32 @@ class ApiController < ApplicationController
     render json: array.to_json
   end
   
+  def between_dates
+    start = DateTime.strptime(params[:start], '%Y-%m-%d')
+    final = DateTime.strptime(params[:final], '%Y-%m-%d')
+
+    if start < final
+      @tweet = Tweet.all
+      array = []
+      
+      @tweet.each do |t|
+        if t.created_at >= start && t.created_at <= final
+          r = {
+            id: t.id,
+            content: t.content,
+            user_id: t.user.id,
+            like_count: t.likes.count,
+            retweets_count: t.retweets.count,
+            retwitted_from: t.retweet_id,
+            retwitted_from: t.created_at
+          }
+
+          array.append(r)
+        end
+      end
+
+      render json: array.to_json
+    end
+  end
+  
 end
