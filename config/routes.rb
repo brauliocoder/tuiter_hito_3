@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   end
   
   get '/home', to: "tweets#home", as: "home"
+  get '/api/news', to: "api#news", as: "api"
 
 end
